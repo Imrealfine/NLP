@@ -1,0 +1,100 @@
+version: "3.1"
+
+rules:
+
+  # 1. you are the new customer or returning customer?
+  - rule: ask customer type
+    steps:
+      - intent: greet
+      - action: utter_ask_customer_type
+
+  - rule: what's your opening hours
+    steps:
+      - intent: ask_open_hours
+      - action: utter_ask_open_hours
+      - action: utter_menu
+
+  # 1.a new customer → menu
+  - rule: new customer sees menu
+    steps:
+      - intent: affirm
+      - action: utter_menu
+
+  # 1.b old customer -> what do you want?
+  - rule: old customer
+    steps:
+      - intent: deny
+      - action: utter_ask_order
+
+  - rule: you have the menu
+    steps:
+      - intent: order_pizza
+      - action: utter_menu
+
+  - rule: returning customer direct order prompt
+    steps:
+      - intent: returning_customer
+      - action: utter_ask_order
+
+  # 2. customer say the type -> tell the size 
+  - rule: ask pizza size when user gives type
+    steps:
+      - intent: provide_pizza_type
+      - action: utter_ask_pizza_size
+
+  # 3. tell the size  → calculate price & ask payment
+  - rule: calculate price and ask payment
+    steps:
+      - intent: provide_pizza_size
+      - action: action_calculate_price
+      - action: utter_ask_payment_method
+
+  # 4.1 cash → generate order id & bye
+  - rule: process cash payment
+    steps:
+      - intent: pay_cash
+      - action: action_generate_order_id
+      - action: utter_enjoy_pizza
+
+  # 4.2 cash → generate order id & bye
+  - rule: process card payment
+    steps:
+      - intent: pay_card
+      - action: action_generate_order_id
+      - action: utter_enjoy_pizza
+
+  # 5. no pay → you want change ?
+  - rule: user does not pay
+    steps:
+      - intent: pay_no
+      - action: utter_ask_replace_order
+
+  # 5.a wantchange → back to menu
+  - rule: replace order yes
+    condition:
+      - slot_was_set:
+          - price
+    steps:
+      - intent: replace_yes
+      - action: utter_menu
+
+  # 5.b no change → bye
+  - rule: replace order no
+    condition:
+      - slot_was_set:
+          - price
+    steps:
+      - intent: replace_no
+      - action: utter_goodbye
+
+  # 6. googbye
+  - rule: goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: handle fallback
+    steps:
+      - intent: nlu_fallback
+      - action: utter_please_say_again
+      - action: action_listen

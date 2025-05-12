@@ -1,0 +1,104 @@
+version: "3.1"
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - order_pizza
+  - provide_pizza_type
+  - provide_pizza_size
+  - ask_open_hours
+  - pay_cash          
+  - pay_card          
+  - pay_no            
+  - returning_customer 
+  - replace_yes
+  - replace_no
+  - nlu_fallback
+
+entities:
+  - pizza_type
+  - pizza_size
+  - topping
+  - drink_type
+  - customer_name
+
+slots:
+  pizza_type:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: pizza_type
+      - type: from_text
+        intent: provide_pizza_type
+  pizza_size:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: pizza_size
+      - type: from_text
+        intent: provide_pizza_size
+  price:
+    type: float
+    initial_value: null
+    mappings: []
+
+  is_new_customer:
+    type: bool
+    initial_value: null
+    mappings:
+      - type: from_intent
+        intent: affirm
+        value: true
+      - type: from_intent
+        intent: returning_customer
+        value: false
+
+
+responses:
+  utter_greet:
+    - text: "Hello! Welcome to Pizza Paradise. What can I get for you today?"
+  utter_ask_pizza_type:
+    - text: "Which type of pizza would you like? We have Margherita, Marinara, and Hawaiian."
+  utter_ask_pizza_size:
+    - text: "Which size would you prefer? Small, Medium, or Large?"
+  utter_price:
+    - text: "The total price is {price} euros."
+  utter_ask_confirm:
+    - text: "Would you like to confirm your order?"
+  utter_confirmed:
+    - text: "Great! Your order ID is {order_id}. Please pick it up at the shop. Enjoy!"
+  utter_ask_open_hours:
+    - text: "We are open from 10 AM to 10 PM every day."
+  utter_ask_customer_type:
+    - text: "Is this your first time ordering with us?"
+  utter_menu:
+    - text: |
+        🍕 **Our Menu** 🍕
+        
+           **Pizzas**
+           - Margherita (with €2 discount)
+           - Marinara
+           - Hawaiian
+        
+           **Sizes**
+           - Small  — €12  
+           - Medium — €14  
+           - Large  — €18
+
+  utter_ask_order:
+    - text: "So what would you like to order today?"
+  utter_ask_payment_method:
+    - text: "How would you like to pay? We accept cash, card, or you can skip payment."
+  utter_enjoy_pizza:
+    - text: "All set! Please enjoy your pizza – it’ll be ready shortly!"
+  utter_ask_replace_order:
+    - text: "You chose not to pay. Would you like to pick a different pizza instead?"
+  utter_goodbye:
+    - text: "See you! Enjoy your pizza 🍕!"
+  utter_please_say_again:
+    - text: "Sorry, I didn't understand that. Could you please say that again?"
+
+actions:
+  - action_calculate_price
+  - action_generate_order_id

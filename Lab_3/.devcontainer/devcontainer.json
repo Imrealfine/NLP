@@ -1,0 +1,13 @@
+{
+    "name": "TensorFlow GPU",
+    "image": "tensorflow/tensorflow:latest-gpu",
+    "extensions": [
+      "ms-python.python",
+      "ms-toolsai.jupyter"
+    ],
+    "runArgs": [
+      "--gpus", "all"
+    ],
+    "postCreateCommand": "pip install -r requirements.txt"
+  }
+  

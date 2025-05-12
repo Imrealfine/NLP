@@ -1,0 +1,184 @@
+version: "3.1"
+
+nlu:
+# Welcome
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - hi there
+    - hello there
+    - hey buddy
+    - good morning
+    - good afternoon
+    - good evening
+    - yo
+
+
+- intent: order_pizza
+  examples: |
+    - I want to order a pizza
+    - I'd like a pizza
+    - Can I get a pizza?
+    - I'd like to place an order for a pizza
+    - Order pizza
+    - Please get me a pizza
+    - Put in an order for one pizza
+    - I'm ready to order a pizza
+    - Let me order a pizza
+    - I'd like to buy a pizza
+    - Do you have the menu?
+    - Menu
+    - you have the menu?
+    - Menu please
+
+
+- intent: provide_pizza_type
+  examples: |
+    - Margherita
+    - [Margherita](pizza_type)
+    - i want one Margherita
+    - I'd like a Margherita
+    - Could I get a [Margherita](pizza_type)?
+    - Marinara, please
+    - I'd like a [Marinara](pizza_type)
+    - Can I have a Marinara pizza?
+    - Hawaiian
+    - I'd love a [Hawaiian](pizza_type)
+    - Let me have a Hawaiian
+    - My choice is Margherita
+    - I'm in the mood for Marinara
+    - I'll go for a Hawaiian
+    - Make it a Margherita
+
+
+- intent: provide_pizza_size
+  examples: |
+    - Small
+    - [Small](pizza_size)
+    - I'd like a [small](pizza_size) one
+    - Please make it small
+    - A small size, thanks
+    - Medium
+    - [Medium](pizza_size), please
+    - I'd like a medium
+    - Give me a [medium](pizza_size)
+    - Large
+    - [Large](pizza_size)
+    - I'll take a large
+    - Make it large
+    - Can I have a large pizza?
+    - One medium piece
+
+
+- intent: ask_open_hours
+  examples: |
+    - What time do you open?
+    - When are you open?
+    - Opening hours?
+    - What are your hours?
+    - When do you close?
+    - What is your schedule?
+    - Business hours?
+    - Till what time are you open?
+
+
+- intent: affirm
+  examples: |
+    - yes
+    - sure
+    - ok
+    - yep
+    - yeah
+    - absolutely
+    - of course
+    - definitely
+    - sure thing
+    - sounds good
+
+
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - nah
+    - not really
+    - not now
+    - I don't think so
+    - maybe later
+
+
+- intent: pay_cash
+  examples: |
+    - I'll pay cash
+    - Cash, please
+    - I want to pay with cash
+    - Cash payment
+    - I'll use cash
+    - Paying cash
+    - In cash
+
+
+- intent: pay_card
+  examples: |
+    - I'll pay by card
+    - Credit card
+    - Debit card
+    - Card payment
+    - Charge to my card
+    - I'll use my card
+    - Pay with card
+
+
+- intent: pay_no
+  examples: |
+    - I won't pay
+    - No payment
+    - Skip payment
+    - Not paying now
+    - I'll pay later
+    - No, not yet
+    - I want to change instead
+
+
+- intent: returning_customer
+  examples: |
+    - No, I've ordered before
+    - I'm a returning customer
+    - Not my first time here
+    - Nope, I've been here
+    - I already have an account
+    - I'm not new
+    - I've ordered previously
+
+
+- intent: replace_yes
+  examples: |
+    - Yes, show me the menu again
+    - Sure, I want something else
+    - I'd like a different pizza
+    - Yes, I'll pick another
+    - Show me other options
+    - Let me choose again
+
+
+- intent: replace_no
+  examples: |
+    - No, that's all
+    - No thanks
+    - I'm done, thanks
+    - Nothing else
+    - All good, bye
+    - No, I'm fine
+
+
+- intent: goodbye
+  examples: |
+    - Bye
+    - See you later
+    - Goodbye
+    - byebye
+    - Catch you later
+    - See ya
+    - Farewell
